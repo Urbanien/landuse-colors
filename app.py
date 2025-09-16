@@ -16,13 +16,14 @@ query = st.text_input("토지이용 구분 입력 (예: 단독주택, 상업용�
 if query:
     row = df[df["토지이용 구분"] == query]
     if not row.empty:
+     code = row.iloc[0]["CAD 색상번호"]     # CAD 코드 가져오기
         r, g, b = row.iloc[0][["R", "G", "B"]]
 
 # RGB → HEX 변환
         hex_code = "#{:02X}{:02X}{:02X}".format(r, g, b)
 
-# 결과 표시 (RGB + HEX 함께)
-        st.success(f"✅ {query} → RGB({r}, {g}, {b}) / HEX {hex_code}")
+# 결과 표시 (CAD 코드 + HEX)
+        st.success(f"✅ {query} → CAD 코드: {code} / HEX {hex_code}")
 
 # 색상 미리보기 박스 (HEX 코드 사용)
         st.markdown(
