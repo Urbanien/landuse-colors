@@ -10,20 +10,25 @@ st.title("🎨 토지이용 색상 검색기")
 st.write("토지이용 구분을 입력하면 CAD 코드와 색상 코드를 알려드립니다.")
 
 
-# 검색 입력창
+# 컬럼명 앞뒤 공백 제거
+df.columns = df.columns.str.strip()
+
+# HEX 컬럼 추가
+def rgb_to_hex(r, g, b):
+    return "#{:02X}{:02X}{:02X}".format(int(r), int(g), int(b))
+
+df["HEX"] = df.apply(lambda row: rgb_to_hex(row["R"], row["G"], row["B"]), axis=1)
+
+# 검색
 query = st.text_input("토지이용 구분 입력 (예: 단독주택, 상업용지, 도로 등):")
 
 if query:
     row = df[df["토지이용 구분"] == query]
     if not row.empty:
-        code = row.iloc[0]["CAD 색상번호"]     # CAD 코드
-        r, g, b = row.iloc[0][["R", "G", "B"]]
-
-        # RGB → HEX 변환
-        hex_code = "#{:02X}{:02X}{:02X}".format(r, g, b)
-
-        # 결과 표시 (CAD 코드 + HEX)
+        code = row.iloc[0]["CAD 색상번호"]
+        hex_code = row.iloc[0]["HEX"]
         st.success(f"✅ {query} → CAD 코드: {code} / HEX {hex_code}")
+
 
         # 색상 미리보기 박스
         st.markdown(
