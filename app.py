@@ -16,18 +16,24 @@ if query:
     row = df[df["토지이용 구분"] == query]
     if not row.empty:
         r, g, b = row.iloc[0][["R", "G", "B"]]
-        st.success(f"✅ {query} → RGB({r}, {g}, {b})")
 
-        # 색상 미리보기 박스
+# RGB → HEX 변환
+        hex_code = "#{:02X}{:02X}{:02X}".format(r, g, b)
+
+# 결과 표시 (RGB + HEX 함께)
+        st.success(f"✅ {query} → RGB({r}, {g}, {b}) / HEX {hex_code}")
+
+# 색상 미리보기 박스 (HEX 코드 사용)
         st.markdown(
             f"""
             <div style='width:200px; height:100px; 
                         border-radius:10px; 
                         border:1px solid #000; 
-                        background-color: rgb({r},{g},{b});'>
+                        background-color: {hex_code};'>
             </div>
-            """ ,
+            """,
             unsafe_allow_html=True
         )
+
     else:
         st.error("❌ 해당 구분을 찾을 수 없습니다. (landuse_colors.xlsx를 확인하세요)")
