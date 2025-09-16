@@ -7,7 +7,8 @@ df = pd.read_excel("landuse_colors.xlsx")
 st.set_page_config(page_title="토지이용 색상 검색기", page_icon="🎨", layout="centered")
 
 st.title("🎨 토지이용 색상 검색기")
-st.write("토지이용 구분을 입력하면 RGB 값을 알려드립니다.")
+st.write("토지이용 구분을 입력하면 RGB 값, 색상 코드를 알려드립니다.")
+
 
 # 검색 입력창
 query = st.text_input("토지이용 구분 입력 (예: 단독주택, 상업용지, 도로 등):")
