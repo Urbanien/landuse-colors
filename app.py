@@ -15,18 +15,21 @@ st.write("토지이용 구분을 입력하면 CAD 코드, RGB, HEX, 예시 이�
 query = st.text_input("토지이용 구분 입력 (예: 제1종전용주거지역, 단독주택, 중심상업지역 등):").strip()
 
 if query:
-    # 부분 일치 검색
-    row = df[df["토지이용 구분"].str.contains(re.escape(query), case=False, na=False)]
-    if not row.empty:
-        item = row.iloc[0]
+    # 부분 일치 검색 (대소문자 무시)
+    results = df[df["토지이용 구분"].str.contains(re.escape(query), case=False, na=False)]
 
-        st.success(
-            f"✅ {item['토지이용 구분']} → "
-            f"CAD 코드: {item['CAD 색상번호']} / "
-            f"RGB: ({item['R']}, {item['G']}, {item['B']}) / "
-            f"HEX: {item['HEX']}"
-        )
+    if not results.empty:
+        st.success(f"🔍 검색 결과: {len(results)}건")
 
+        for _, item in results.iterrows():
+            st.markdown(
+                f"""
+                **{item['토지이용 구분']}**  
+                CAD 코드: {item['CAD 색상번호']}  
+                RGB: ({item['R']}, {item['G']}, {item['B']})  
+                HEX: {item['HEX']}  
+                """
+            )
         # 색상 박스 미리보기
         if pd.notna(item["HEX"]):
             st.markdown(
