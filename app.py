@@ -59,7 +59,7 @@ for _, row in df.iterrows():
         f"""
         <div style="display:flex; align-items:center; margin-bottom:10px;">
             <div style="width:220px;"><b>{row['토지이용 구분']}</b></div>
-            <div style="width:100px;">CAD {row['CAD 색상번호']}</div>
+            <div style="width:100px;">CAD {row['CAD']}</div>
             <div style="width:120px;">{row['HEX']}</div>
         </div>
         """,
