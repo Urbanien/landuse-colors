@@ -25,7 +25,7 @@ if query:
             st.markdown(
                 f"""
                 **{item['토지이용 구분']}**  
-                CAD 코드: {item['CAD 색상번호']}  
+                CAD 코드: {item['CAD']}  
                 RGB: ({item['R']}, {item['G']}, {item['B']})  
                 HEX: {item['HEX']}  
                 """
