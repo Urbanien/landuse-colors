@@ -6,7 +6,7 @@ import re
 st.set_page_config(page_title="토지이용 색상 검색기", page_icon="🎨", layout="wide")
 
 # 엑셀 불러오기
-df = pd.read_excel("landuse_colors.xlsx")
+df = pd.read_excel("landuse_colors..xlsx")
 
 st.title("🎨 토지이용 색상 검색기")
 st.write("토지이용 구분을 입력하면 CAD 코드, RGB, HEX, 예시 이미지를 보여줍니다.")
